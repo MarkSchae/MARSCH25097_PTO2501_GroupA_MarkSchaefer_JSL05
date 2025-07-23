@@ -42,9 +42,18 @@ const initialTasks = [
   },
 ];
 
+// Check if any data with the key 'users' exists and save the initial tasks to local storage
+if (!localStorage.getItem('tasks')) {
+  localStorage.setItem('tasks', JSON.stringify(initialTasks));
+  console.log('Tasks saved');
+} else {
+  console.log('Tasks already exists in the local storage');
+}
+
 // Filter the tasks by their status and store them in separate arrays
 const toDoTasks = initialTasks.filter(task => task.status === 'todo');
 const doneTasks = initialTasks.filter(task => task.status === 'done');
 const doingTasks = initialTasks.filter(task => task.status === 'doing');
+
 
 export {toDoTasks, doneTasks, doingTasks};
