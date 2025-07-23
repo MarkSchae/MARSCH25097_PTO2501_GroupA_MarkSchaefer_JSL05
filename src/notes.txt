@@ -1,0 +1,37 @@
+Workflow: 
+    Create the html elements in the DOM for each object dynamically
+    Sort each object by status
+    Add the styling
+    Create a button to edit each task
+    Create a button to save the edits
+    Create a function to save the changes to the objects using the id as a identifier
+
+Saving the edits to the innerhtml, and then the database later in the course
+Make a save button, when clicked update the html with the inputs from the user, just get it from the input field id, also need to use the object id
+Function to show the detail view when clicking on one of the tasks and code to exit the detailed view
+Add a onclick function to each div and display the detailed information on a styled card according to the figma
+
+Function to allow the user to modify the description etc of the task
+
+Status drop down menu to change the status
+
+Going to need to have some code that updates the array and the html when changes are made, maybe a save changes button
+
+Thoughts for the upcoming functionality:
+    Thinking about writing the code to update the objetcs when a user edits their tasks
+    Need to update the object itself
+    Need to update the innerhtml so it changes with and without the reload
+    Need to change the column that the task is in
+    Need to make sure that the edited tasks are created dynamicaly into the correct columns etc
+    Create a save changes button
+    How to increment id when some tasks are deleted/other scenarios
+
+So this works but because the array is hard-coded it does not really work very well, in future update/PUT/Patch the objects themselves when we are using persisting data methods
+I would like to do this and then call a function that builds the columns which will update the view with the edits
+
+Modular js files:
+    filter methods
+    opening the detailed view 
+    saving edits 
+    closing the detailed view 
+    dynamically creating the html elements in the DOM for the task objects 

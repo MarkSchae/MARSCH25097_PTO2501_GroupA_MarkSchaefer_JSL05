@@ -1,0 +1,26 @@
+/* Try to only create custom classes for repeated code otherwise it defeats the main point of Tailwind */
+
+@import "tailwindcss";
+
+/* Styling for the tasks cards */
+.card-styling {
+    @apply h-16 w-full max-w-[288px] flex items-center pl-5 rounded-lg bg-[#FFFFFF] font-bold leading-[100%] text-[15px] tracking-[0px] font-['Plus_Jakarta_Sans'];
+    box-shadow: 0px 4px 6px 0px #364E7E1A;
+}
+
+.detailed-card-styling {
+    @apply flex flex-col gap-1.5 p-2 w-[345px] h-[410px] sm:w-[600px] rounded-lg bg-white;
+    box-shadow: 0px 4px 6px 0px #364E7E1A;
+}
+
+.label-color {
+    @apply text-[#828FA3];
+}
+
+.input-border {
+    @apply border border-[#828FA340]; 
+}
+
+.click-hover {
+    @apply cursor-pointer transition-transform transform hover:-translate-y-1 hover:shadow-lg;
+}
