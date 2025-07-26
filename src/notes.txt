@@ -35,3 +35,5 @@ Modular js files:
     saving edits 
     closing the detailed view 
     dynamically creating the html elements in the DOM for the task objects 
+
+Modular js - get the html elements once, save into a variable and export import where it needs to be used more than once 

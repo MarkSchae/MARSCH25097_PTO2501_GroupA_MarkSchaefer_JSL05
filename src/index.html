@@ -32,6 +32,30 @@
 
      <main class="grid grid-cols-1 gap-4 relative sm:grid-cols-3 sm:grid-rows-[97px_1fr]">
 
+        <!-- Elements for the add task modal view of the tasks -->
+        <div id="add-task-modal" class="hidden absolute z-50 top-[20px] left-[12px] sm:top-[242px] sm:left-[200px]">
+            <div class="flex justify-between">
+                <h6>Add New Task</h6>
+                <img class="w-3.5 h-3.5" id="exit-button" src="/images/exit.png" alt="Red Exit Button">
+            </div>
+            <div class="flex flex-col gap-6">
+                <label class="label-color" for="add-title">Title</label>
+                <input class="input-border" id="add-title" type="text" placeholder="New Task Title">
+            </div>
+            <div class="flex flex-col gap-6">
+                <label class="label-color" for="add-description">Description</label>
+                <input class="input-border h-[112px]" id="add-description" type="text" placeholder="New Task Description">
+            </div>
+            <div class="flex flex-col gap-6">
+                <label class="label-color" for="add-task-status">Status</label>
+                <select class="input-border" name="add-task-status" id="add-task-status">
+                    <option value="todo">ToDo</option>
+                    <option value="done">Done</option>
+                    <option value="doing">Doing</option>
+                </select>
+            </div>
+        </div>
+
         <!-- Elements for the detailed view of the tasks -->
         <div id="detailed-task-card" class="hidden absolute z-50 top-[20px] left-[12px] sm:top-[242px] sm:left-[200px]">
             <div class="flex justify-between">

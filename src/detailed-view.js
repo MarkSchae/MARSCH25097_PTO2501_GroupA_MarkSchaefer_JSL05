@@ -31,12 +31,16 @@ function detailedTasksView (task, taskDiv) {
   }
 };
 
+// Might need to moduralize the exit button function
 // The function to return the page to normal when exiting the detailed view
 function exitTasksView () {
   const detailedTaskCard = document.getElementById('detailed-task-card');
+  const taskModal = document.getElementById('add-task-modal');
   const overlay = document.getElementById('backdrop'); 
   detailedTaskCard.classList.add('hidden');
+  taskModal.classList.add('hidden');
   detailedTaskCard.classList.remove('detailed-card-styling');
+  taskModal.classList.remove('detailed-card-styling');
   overlay.classList.add('hidden');
 };
 
