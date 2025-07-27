@@ -8,6 +8,8 @@ import { toDoColumn, doneColumn, doingColumn } from './tasks.js';
  * @returns {*void} - updates the task object with the edited values and moves the task if the status changes
  */
 function saveChanges (task, taskDiv) {
+  // Save changes to the task objects saved inside the local storage
+  // At the moment this only saves changes for the session
   task.title = document.getElementById('edit-title').value;
   task.description = document.getElementById('edit-description').value;
   task.status = document.getElementById('edit-task-status').value;

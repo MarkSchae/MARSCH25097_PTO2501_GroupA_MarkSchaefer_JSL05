@@ -1,4 +1,6 @@
 // Need to get the add new task button element and trigger the add task modal when clicked
+import { filterTasks } from "./filter.js";
+import { renderTasks } from "./tasks.js";
 
 // Display the add task modal which is hidden until the 'add task' button is clicked
 function addTaskModal () {
@@ -7,6 +9,9 @@ function addTaskModal () {
   if(existingButton) {
     existingButton.remove();
   }
+  // Remove any existing text inside the user input fields
+  document.getElementById('add-title').value = '';
+  document.getElementById('add-description').value = '';
   // Display the modal and set up the events/functions for saving the new task
   const button = document.createElement('button');
   button.id = 'btn-save-new-task';
@@ -24,11 +29,13 @@ function addTaskModal () {
 };
 
 document.getElementById('btn-add-task').addEventListener('click', addTaskModal);
+
 // Add new task to the initialTasks array and re-save the array into local storage
 function saveNewTask () {
   // Create new task and save to local storage
   const newTask = {};
   // Get the new tasks inputs from the user
+  // Add a check for empty input fields(required)
   newTask.title = document.getElementById('add-title').value;
   newTask.description = document.getElementById('add-description').value;
   newTask.status = document.getElementById('add-task-status').value;
@@ -42,8 +49,25 @@ function saveNewTask () {
   tasks.push(newTask);
   // Update the local storage array of the initialTasks
   localStorage.setItem('tasks', JSON.stringify(tasks));
-}
 
+  filterTasks();
+  renderTasks();
+};
+
+
+
+  // Display the new task client side without reload
+  // Need to create the div element (taskDiv)
+  /* const taskDiv = document.createElement('div');
+  taskDiv.className = 'card-styling click-hover';
+  taskDiv.innerHTML = newTask.title;
+  if (newTask.status.toLowerCase() === 'todo') {
+    toDoColumn.appendChild(taskDiv);
+  } else if (newTask.status.toLowerCase() === 'done') {
+    doneColumn.appendChild(taskDiv);
+  } else if (newTask.status.toLowerCase() === 'doing') {
+    doingColumn.appendChild(taskDiv);
+  }*/
 /* Use as example of saving the new task client side without requiring a reload
 function saveChanges (task, taskDiv) {
   task.title = document.getElementById('edit-title').value;

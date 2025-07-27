@@ -50,12 +50,16 @@ if (!localStorage.getItem('tasks')) {
   console.log('Tasks already exists in the local storage');
 }
 
-const tasksData = localStorage.getItem('tasks');
-const tasks = JSON.parse(tasksData);
-// Filter the tasks by their status and store them in separate arrays
-const toDoTasks = tasks.filter(task => task.status === 'todo');
-const doneTasks = tasks.filter(task => task.status === 'done');
-const doingTasks = tasks.filter(task => task.status === 'doing');
+function filterTasks () {
+  const tasksData = localStorage.getItem('tasks');
+  const tasks = JSON.parse(tasksData);
+  // Filter the tasks by their status and store them in separate arrays
+  const toDoTasks = tasks.filter(task => task.status === 'todo');
+  const doneTasks = tasks.filter(task => task.status === 'done');
+  const doingTasks = tasks.filter(task => task.status === 'doing');
+  return { toDoTasks, doneTasks, doingTasks };
+};
 
+filterTasks();
 
-export {toDoTasks, doneTasks, doingTasks};
+export { filterTasks };
