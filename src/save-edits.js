@@ -20,7 +20,7 @@ function saveChanges (task, taskDiv) {
     doingColumn.appendChild(taskDiv);
   }
 };
-
-document.getElementById('exit-button').addEventListener('click', exitTasksView);
+// Get all instances of the exit button and add the click listner to run the function
+document.querySelectorAll('.exit-btn').forEach(btn => {btn.addEventListener('click', exitTasksView)});
 
 export { saveChanges };

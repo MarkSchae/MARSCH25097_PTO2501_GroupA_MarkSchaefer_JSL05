@@ -37,3 +37,9 @@ Modular js files:
     dynamically creating the html elements in the DOM for the task objects 
 
 Modular js - get the html elements once, save into a variable and export import where it needs to be used more than once 
+Look into refactor functions using inheritance and prototypes
+
+Look into refactoring using the local storage to share data between the js code instead of import/export (may be a security risk as its saved in the browser)
+    Apparentley this is not best practice and this all becomes redundant when using a database and api endpoints
+
+Need to keep in mind that I have not coded enough validation checks to this code, in future I need to check variables and errors etc for debugging purposes
