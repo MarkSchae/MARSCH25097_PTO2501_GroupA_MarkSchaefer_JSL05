@@ -18,19 +18,16 @@
     
     <!-- Header section with the kanban svg -->
     <!-- Mobile first -->
-     <header class="sm:bg-white pt-8 border border-[#E4EBFA]">
-        <img src="/images/logo-light.svg" class="w-[375px] h-16 sm:w-[169px] sm:h-[30px] sm:pl-8 sm:mb-12" alt="Kanban Logo">
+    <header class="hidden sm:block sm:bg-white pt-8 border border-[#E4EBFA]">
+        <img src="/images/logo-light.svg" class="hidden w-[375px] h-16 sm:w-[169px] sm:h-[30px] sm:pl-8 sm:mb-12" alt="Kanban Logo">
         <!-- Hide these elements for the mobile screen size -->
         <div class="hidden sm:block text-[#828FA3] text-[12px] pl-8 mb-4">All boards (1)</div>
         <div class="hidden sm:block text-white rounded-tr-[100px] rounded-br-[100px] bg-[#635FC7] pl-8 w-[276px] h-[48px] leading-[48px]">
             Launch Career
         </div>
-        <button id="btn-add-task" class="bg-[#635FC7] text-white px-4 py-2 rounded hover:bg-[#5a54c5] transition mt-4">
-            Add Task
-        </button>
-     </header>
+    </header>
 
-     <main class="grid grid-cols-1 gap-4 relative sm:grid-cols-3 sm:grid-rows-[97px_1fr]">
+    <main class="grid grid-cols-1 gap-4 relative sm:grid-cols-3 sm:grid-rows-[97px_1fr]">
 
         <!-- Elements for the add task modal view of the tasks -->
         <div id="add-task-modal" class="hidden absolute z-50 top-[20px] left-[12px] sm:top-[242px] sm:left-[200px]">
@@ -40,11 +37,11 @@
             </div>
             <div class="flex flex-col gap-6">
                 <label class="label-color" for="add-title">Title</label>
-                <input class="input-border" id="add-title" type="text" placeholder="New Task Title">
+                <input class="input-border" id="add-title" type="text" placeholder="New Task Title" required>
             </div>
             <div class="flex flex-col gap-6">
                 <label class="label-color" for="add-description">Description</label>
-                <input class="input-border h-[112px]" id="add-description" type="text" placeholder="New Task Description">
+                <input class="input-border h-[112px]" id="add-description" type="text" placeholder="New Task Description" required>
             </div>
             <div class="flex flex-col gap-6">
                 <label class="label-color" for="add-task-status">Status</label>
@@ -82,14 +79,28 @@
         
          <!-- Heading for the desktop screen, span the entire first row -->
          <!-- Hide these elements for the mobile screen size -->
-         <div class="hidden sm:flex col-span-full bg-white text-2xl items-center pl-5 font-bold border border-[#E4EBFA]">LAUNCH CAREER</div>
+        <div class="hidden sm:flex justify-between col-span-full bg-white text-2xl items-center pl-5 font-bold border border-[#E4EBFA]">
+            LAUNCH CAREER
+            <button id="btn-add-task" class="hidden bg-[#635FC7] text-white hover:bg-[#5a54c5] transition mt-4 rounded-3xl px-4 py-6 w-40 h-12 text-[15px] sm:flex justify-center items-center mr-16">
+                +Add Task
+            </button>
+        </div>
+        <!-- Code to hide this element on sm and flex on mobile -->
+        <div class="flex sm:hidden justify-between col-span-full bg-white text-2xl items-center pl-5 font-bold border border-[#E4EBFA] h-16">
+            <img class="w-6 h-6"  src="/images/fav.svg" alt="">
+            <button id="btn-add-task" class="bg-[#635FC7] text-white hover:bg-[#5a54c5] transition rounded-3xl p-1 w-8 h-8 text-[15px] flex justify-center items-center mr-4">
+                +
+            </button>
+        </div>
+
+
         <!-- First column 'todo' -->
-         <div id="todo-column" class="flex flex-col gap-4 items-center">
+        <div id="todo-column" class="flex flex-col gap-4 items-center">
             <div class="flex flex-row w-full max-w-[288px] h-4 text-[12px] py-10 shrink-0 text-[#828FA3]">
                 <img src="/images/Oval-b.png" class="w-[15px] h-[15px] mr-3.5" alt="Purple circle">TODO (4)
             </div>
             <!-- Generate the div tasks cards here with the card-styling -->
-         </div>
+        </div>
         <!-- Second column 'Doing' -->
         <div id="doing-column" class="flex flex-col gap-4 items-center">
             <div class="flex flex-row w-full max-w-[288px] h-4 text-[12px] py-10 shrink-0 text-[#828FA3]">
@@ -103,8 +114,8 @@
                 <img src="/images/Oval-g.png" class="w-[15px] h-[15px] mr-3.5" alt="Blue circle">DONE (2)
             </div>
             <!-- Generate the div tasks cards here with the card-styling -->
-         </div>
-     </main>
+        </div>
+    </main>
 
      <footer>
         <!-- TBC -->

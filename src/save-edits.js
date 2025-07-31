@@ -21,6 +21,7 @@ function saveChanges (task, taskDiv) {
   } else if (task.status.toLowerCase() === 'doing') {
     doingColumn.appendChild(taskDiv);
   }
+  exitTasksView();
 };
 // Get all instances of the exit button and add the click listner to run the function
 document.querySelectorAll('.exit-btn').forEach(btn => {btn.addEventListener('click', exitTasksView)});

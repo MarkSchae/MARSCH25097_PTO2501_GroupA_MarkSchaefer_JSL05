@@ -1,6 +1,7 @@
 // Need to get the add new task button element and trigger the add task modal when clicked
 import { filterTasks } from "./filter.js";
 import { renderTasks } from "./tasks.js";
+import { exitTasksView } from './detailed-view.js';
 
 // Display the add task modal which is hidden until the 'add task' button is clicked
 function addTaskModal () {
@@ -28,10 +29,14 @@ function addTaskModal () {
   }
 };
 
-document.getElementById('btn-add-task').addEventListener('click', addTaskModal);
+document.querySelectorAll('#btn-add-task').forEach(btn => {
+  btn.addEventListener('click', addTaskModal);
+});
 
 // Add new task to the initialTasks array and re-save the array into local storage
 function saveNewTask () {
+  // Need to validate that the fields are not empty and display a required type message if they are empty
+
   // Create new task and save to local storage
   const newTask = {};
   // Get the new tasks inputs from the user
@@ -52,33 +57,5 @@ function saveNewTask () {
 
   filterTasks();
   renderTasks();
+  exitTasksView();
 };
-
-
-
-  // Display the new task client side without reload
-  // Need to create the div element (taskDiv)
-  /* const taskDiv = document.createElement('div');
-  taskDiv.className = 'card-styling click-hover';
-  taskDiv.innerHTML = newTask.title;
-  if (newTask.status.toLowerCase() === 'todo') {
-    toDoColumn.appendChild(taskDiv);
-  } else if (newTask.status.toLowerCase() === 'done') {
-    doneColumn.appendChild(taskDiv);
-  } else if (newTask.status.toLowerCase() === 'doing') {
-    doingColumn.appendChild(taskDiv);
-  }*/
-/* Use as example of saving the new task client side without requiring a reload
-function saveChanges (task, taskDiv) {
-  task.title = document.getElementById('edit-title').value;
-  task.description = document.getElementById('edit-description').value;
-  task.status = document.getElementById('edit-task-status').value;
-  taskDiv.innerHTML = task.title;
-  if (task.status.toLowerCase() === 'todo') {
-    toDoColumn.appendChild(taskDiv);
-  } else if (task.status.toLowerCase() === 'done') {
-    doneColumn.appendChild(taskDiv);
-  } else if (task.status.toLowerCase() === 'doing') {
-    doingColumn.appendChild(taskDiv);
-  }
-}; */
