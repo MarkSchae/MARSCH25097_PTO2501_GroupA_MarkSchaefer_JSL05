@@ -49,7 +49,14 @@ if (!localStorage.getItem('tasks')) {
 } else {
   console.log('Tasks already exists in the local storage');
 }
-
+/**
+ * Filters tasks stored in localStorage into separate arrays based on their status.
+ * @function filterTasks
+ * @returns {Object} An object containing three arrays:
+ *   - {Array<Object>} toDoTasks - Tasks with status 'todo'
+ *   - {Array<Object>} doneTasks - Tasks with status 'done'
+ *   - {Array<Object>} doingTasks - Tasks with status 'doing'
+ */
 function filterTasks () {
   const tasksData = localStorage.getItem('tasks');
   const tasks = JSON.parse(tasksData);

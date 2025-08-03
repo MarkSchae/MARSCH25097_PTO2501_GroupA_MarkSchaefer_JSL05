@@ -34,7 +34,13 @@ document.querySelectorAll('#btn-add-task').forEach(btn => {
 });
 
 // Validation check for empty user input fields and a alert/required message display
-function checkInputs() {
+/**
+ * Checks that the task title, description, and status fields are not empty.
+ * If any field is empty, displays a validation error message next to the field.
+ *
+ * @returns {boolean} Returns true if all required inputs are filled, otherwise false.
+ */
+function checkInputs() { // Add checks to the inputs for incorrect status inputs etc
   const inputs = [
     document.getElementById('add-title'),
     document.getElementById('add-description'),
@@ -51,6 +57,19 @@ function checkInputs() {
   return true; // All valid
 };
 
+/**
+ * @function saveNewTask
+ * @returns {void}
+ *
+ * @example
+ * // Called when user submits the 'Save Task' form
+ * saveNewTask();
+ *
+ * @see checkInputs - Validates form fields
+ * @see filterTasks - Filters tasks for rendering
+ * @see renderTasks - Re-renders task board DOM
+ * @see exitTasksView - Closes the add/edit task modal
+ */
 // Add new task to the initialTasks array and re-save the array into local storage
 function saveNewTask () {
   // Need to validate that the fields are not empty and display a required type message if they are empty

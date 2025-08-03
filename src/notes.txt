@@ -43,3 +43,10 @@ Look into refactoring using the local storage to share data between the js code 
     Apparentley this is not best practice and this all becomes redundant when using a database and api endpoints
 
 Need to keep in mind that I have not coded enough validation checks to this code, in future I need to check variables and errors etc for debugging purposes
+
+Need to implement checks for the following and more in the user inputs:
+    Profanity
+    Minimum or maximum length
+    Duplicate task titles
+    Special characters
+    Forbidden words
