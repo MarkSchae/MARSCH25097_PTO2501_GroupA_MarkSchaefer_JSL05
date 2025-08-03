@@ -4,27 +4,25 @@
 
 A responsive Kanban board built with HTML and Tailwind CSS, designed to help users visualize tasks across various progress stages. The layout is responsive to desktop and mobile screen sizes and is styled to match the provided figma.
 
-🔹 Basic Structure:
+## 📌 Board Structure
 
-- A Kanban board usually has three columns:
+The board includes three primary columns:
 
-- To Do – tasks that need to be started
+To Do – Tasks that need to be started
 
-- In Progress/Doing
+Doing – Tasks currently in progress
 
-- Done – completed tasks
+Done – Completed tasks
 
-Each task is represented by a card and moves from left to right as work progresses.
+Each task is represented as a card and moves from left to right as it progresses.
 
-🔹 Purpose:
+## 🎯 Project Purpose
 
-- Visualize work
+Visualize work clearly
 
-- Limit work in progress
+Improve task flow efficiency
 
-- Improve workflow efficiency
-
-- Increase team collaboration and transparency
+Foster collaboration and transparency
 
 ---
 
@@ -42,13 +40,19 @@ This project mimics the layout and functionality of a basic Kanban board. A KanB
 
 ---
 
-## ✅ Features
+## 🚀 Features
 
-- Responsive grid layout using Tailwind CSS
-- Mobile-first design with adaptation for desktop
-- Task columns for `TODO`, `DOING`, and `DONE`
-- Modular Tailwind class `card-styling` for task items
-- Section headers with consistent spacing and style
+🧱 Responsive grid layout using Tailwind CSS
+
+📱 Mobile-first design
+
+➕ Add, edit, and persist tasks in localStorage
+
+📂 Tasks are dynamically sorted into columns (todo, doing, done)
+
+📝 Click-to-edit tasks with modal interface
+
+♻️ Updates reflected instantly in DOM and local storage
 
 ---
 
@@ -73,7 +77,7 @@ In the terminal (I use the Ubuntu terminal inside VS Code/your terminal of choic
 
 cd into the folder directory or open the folder directly from VS Code
 Run Tailwind's build process to generate output.css:
-npx tailwindcss -i ./input.css -o ./output.css --watch
+npx @tailwindcss/cli -i ./src/Styles/StyleSheets/input.css -o ./src/Styles/StyleSheets/output.css --watch
 This should watch for changes and automatically recompile Tailwind CSS. If the watch is not working then remove it and rebuild manually.
 
 Use the Live Server extension in VS Code to view the HTML file.
@@ -100,69 +104,86 @@ Once you have set up the project and opened `index.html` in a browser:
 
 ## 🛠️ JavaScript Functionality
 
-The JavaScript (`index.js`) in the KanBan Board prompts the user to input details for tasks, specifically three additional tasks:
+The JavaScript (`index.js`) in the KanBan Board prompts the user to input details for tasks.
 
 - **Title**  
 - **Description**  
 - **Status** (must be one of: `todo`, `doing`, or `done`)
 
-To add tasks, click the Add Task button. This triggers prompts. The status must be one of todo, doing, or done. The tasks are then stored and logged in the console.
+The JavaScript (index.js) file powers core interactive behaviors for the Kanban board, including adding, editing, and saving tasks, as well as moving them between columns based on status.
 
-The JS validates the status input, converting it to lowercase and repeatedly prompting the user until a valid status is entered. 
+Key Features:
+Users can add tasks via a prompt (or UI).
 
-After storing the tasks in a variable, the JS logs the title and status of all tasks marked as `done` to the browser console. If no tasks are marked as done, it logs a motivational message encouraging the user to complete a task.
+Users can edit tasks and save changes, which updates local storage.
+
+Tasks are saved with uniqueId to ensure each task can be uniquely identified.
+
+Changes persist across page reloads using localStorage.
+
+Tasks are sorted into columns (todo, doing, done) automatically.
 
 ### Key behaviors:
-- The user is prompted for imput.
-- Status input validation ensures only valid statuses are accepted.
-- The inputs are stored in the appropriate variables.
-- The console outputs pertenant information about the tasks.
+- The user is prompted for input.
+- Input validations are checked.
+- The data is stored persistantley in local storage.
+- The main html page renders the pertenant information about the tasks from the stored data.
 
 ---
 
-### Example code snippet from `index.js`:
+### Example code snippet from `tasks.js`:
 
 ```js
-const tasks = [];
-let uniqueId = 0;
-const addTaskBtn = document.querySelector('#btn-add-task');
-addTaskBtn.addEventListener('click', clickToAddTask);
+// Create the html to add to the DOM for each column
+const toDoColumn = document.getElementById('todo-column');
+const doneColumn = document.getElementById('done-column');
+const doingColumn = document.getElementById('doing-column');
 
-function clickToAddTask() {
-    for(let i = 0; i < 3; i++) {
-        const title = prompt(`Please enter the title of the task ${i + 1}`);
-        const description = prompt('Please enter the description of the task');
-        let taskStatus = prompt('Please enter the status of the task. Valid status: todo, done, doing').toLowerCase(); 
-        
-        while (taskStatus !== 'done' && taskStatus !== 'doing' && taskStatus !== 'todo') {
-            alert('Sorry you did not enter a valid status for the task, please enter todo, done, or doing');
-            taskStatus = prompt('Please enter the status of the task. Valid status: todo, done, doing').toLowerCase();
-        }
-        
-        uniqueId++;
-        tasks.push({
-            uniqueId: uniqueId,
-            title: title,
-            description: description,
-            status: taskStatus
-        });
-    }
+function renderTasks () {
+  const { toDoTasks, doneTasks, doingTasks } = filterTasks();
+  document.querySelectorAll('.tasks-divs').forEach(task => task.remove());
+  // Loop through each object in the new array and create the divs for each one
+  for(let i = 0; i < toDoTasks.length; i++) { // Could use a forEach method to make this cleaner
+    const newToDoTask = document.createElement('div');
+    // Add the function for the detailed view/edits/save changes of the task here
+    newToDoTask.addEventListener('click', () => detailedTasksView(toDoTasks[i], newToDoTask));
+    newToDoTask.className = 'tasks-divs card-styling click-hover';
+    newToDoTask.innerHTML = toDoTasks[i].title;
+    toDoColumn.appendChild(newToDoTask);
+  }
 
-    if(tasks.length == 3) {
-        alert('There are enough tasks, check the console please');
-    } 
+  // Done
+  for(let i = 0; i < doneTasks.length; i++) { // Could use a forEach method to make this cleaner
+    const doneTask = document.createElement('div');
+    // Add the function for the detailed view/edits/save changes of the task here
+    doneTask.addEventListener('click', () => detailedTasksView(doneTasks[i], doneTask));
+    doneTask.className = 'tasks-divs card-styling click-hover';
+    doneTask.innerHTML = doneTasks[i].title;
+    doneColumn.appendChild(doneTask);
+  }
 
-    const completedTasks = tasks.filter(task => task.status === 'done'); 
-    const doneTasks = completedTasks.length > 0; 
-
-    console.log('All tasks:', tasks);
-    console.log('Completed tasks:', completedTasks);
-
-    if(!doneTasks) {
-        console.log("No tasks completed, let's get to work!");
-    }
+  // Doing
+  for(let i = 0; i < doingTasks.length; i++) { // Could use a forEach method to make this cleaner
+    const doingTask = document.createElement('div');
+    // Add the function for the detailed view/edits/save changes of the task here 
+    doingTask.addEventListener('click', () => detailedTasksView(doingTasks[i], doingTask));
+    doingTask.className = 'tasks-divs card-styling click-hover';
+    doingTask.innerHTML = doingTasks[i].title;
+    doingColumn.appendChild(doingTask);
+  }
 };
+renderTasks();
 ```
+
+🔄 Editing Tasks
+To edit a task, click on it. This opens a modal form pre-filled with task details. After editing:
+
+The updated task is saved to local storage.
+
+The card updates visually with the new title.
+
+The card moves to the correct column based on the new status.
+
 ## 🛠️ Future Improvements
 
 - Add more interactivity with JS
