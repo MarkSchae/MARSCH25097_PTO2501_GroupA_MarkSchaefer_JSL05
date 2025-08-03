@@ -60,7 +60,6 @@ function saveNewTask () {
   // Create new task and save to local storage
   const newTask = {};
   // Get the new tasks inputs from the user
-  // Add a check for empty input fields(required)
   newTask.title = document.getElementById('add-title').value;
   newTask.description = document.getElementById('add-description').value;
   newTask.status = document.getElementById('add-task-status').value;

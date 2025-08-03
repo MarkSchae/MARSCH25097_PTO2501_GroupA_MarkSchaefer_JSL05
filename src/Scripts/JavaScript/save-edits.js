@@ -1,4 +1,6 @@
 import { exitTasksView } from './detailed-view.js';
+import { filterTasks } from "./filter.js";
+import { renderTasks } from "./tasks.js";
 import { toDoColumn, doneColumn, doingColumn } from './tasks.js';
 
 /**
@@ -21,6 +23,25 @@ function saveChanges (task, taskDiv) {
   } else if (task.status.toLowerCase() === 'doing') {
     doingColumn.appendChild(taskDiv);
   }
+
+  const updatedTaskId = task.id;
+  const tasksData = localStorage.getItem('tasks');
+  const tasks = JSON.parse(tasksData);
+  
+  // Save the new task into the locally stord 'tasks' array
+  // Find the index of the task you want to update
+  const index = tasks.findIndex(tsk => tsk.id === updatedTaskId);
+
+  if (index !== -1) {
+    tasks[index] = task; // Replace the task at that index
+  } else {
+    console.log("Task not found, maybe add instead?");
+  }
+  // Update the local storage array of the initialTasks
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  filterTasks();
+  renderTasks();
   exitTasksView();
 };
 // Get all instances of the exit button and add the click listner to run the function
