@@ -33,10 +33,30 @@ document.querySelectorAll('#btn-add-task').forEach(btn => {
   btn.addEventListener('click', addTaskModal);
 });
 
+// Validation check for empty user input fields and a alert/required message display
+function checkInputs() {
+  const inputs = [
+    document.getElementById('add-title'),
+    document.getElementById('add-description'),
+    document.getElementById('add-task-status')
+  ];
+
+  for (const input of inputs) {
+    if (!input.checkValidity()) {
+      input.reportValidity();
+      input.focus();
+      return false; // False if invalid
+    }
+  }
+  return true; // All valid
+};
+
 // Add new task to the initialTasks array and re-save the array into local storage
 function saveNewTask () {
   // Need to validate that the fields are not empty and display a required type message if they are empty
-
+  if (!checkInputs()) {
+    return; // Do not let the rest of the funciton run
+  }
   // Create new task and save to local storage
   const newTask = {};
   // Get the new tasks inputs from the user
